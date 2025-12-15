@@ -1,10 +1,13 @@
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
+import { useState } from 'react';
 
 interface MarketOverviewProps {
   selectedStock: string;
 }
 
 export default function MarketOverview({ selectedStock }: MarketOverviewProps) {
+  const [selectedMarket, setSelectedMarket] = useState<string>('S&P 500');
+
   const markets = [
     { name: 'S&P 500', value: '4,783.45', change: '+1.24%', positive: true, volume: '3.2B' },
     { name: 'NASDAQ', value: '15,095.14', change: '+1.67%', positive: true, volume: '4.8B' },
@@ -17,7 +20,12 @@ export default function MarketOverview({ selectedStock }: MarketOverviewProps) {
       {markets.map((market, index) => (
         <div
           key={index}
-          className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/20 hover:scale-105 hover:-translate-y-1 cursor-pointer group"
+          onClick={() => setSelectedMarket(market.name)}
+          className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300 cursor-pointer group ${
+            selectedMarket === market.name
+              ? 'border-emerald-500 shadow-2xl shadow-emerald-500/20 scale-105 -translate-y-1'
+              : 'border-slate-700 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/20 hover:scale-105 hover:-translate-y-1'
+          }`}
         >
           <div className="flex items-start justify-between mb-4">
             <div>

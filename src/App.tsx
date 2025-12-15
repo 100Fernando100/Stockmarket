@@ -8,6 +8,9 @@ import StockSelector from './components/StockSelector';
 import Recommendation from './components/Recommendation';
 import InvestorFeed from './components/InvestorFeed';
 import ChatPanel from './components/ChatPanel';
+import NewsFeed from './components/NewsFeed';
+import Watchlist from './components/Watchlist';
+import TrendingStocks from './components/TrendingStocks';
 
 function App() {
   const [selectedStock, setSelectedStock] = useState('AAPL');
@@ -18,28 +21,39 @@ function App() {
       <Header />
 
       <main className="container mx-auto px-4 py-8 space-y-8">
-        <StockSelector selectedStock={selectedStock} setSelectedStock={setSelectedStock} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-8">
+            <StockSelector selectedStock={selectedStock} setSelectedStock={setSelectedStock} />
 
-        <MarketOverview selectedStock={selectedStock} />
+            <MarketOverview selectedStock={selectedStock} />
 
-        <MarketChart selectedStock={selectedStock} />
+            <MarketChart selectedStock={selectedStock} />
 
-        <IndicatorGrid
-          selectedStock={selectedStock}
-          selectedIndicator={selectedIndicator}
-          onIndicatorClick={setSelectedIndicator}
-        />
+            <IndicatorGrid
+              selectedStock={selectedStock}
+              selectedIndicator={selectedIndicator}
+              onIndicatorClick={setSelectedIndicator}
+            />
 
-        <VideoSection
-          selectedStock={selectedStock}
-          selectedIndicator={selectedIndicator}
-        />
+            <VideoSection
+              selectedStock={selectedStock}
+              selectedIndicator={selectedIndicator}
+            />
 
-        <Recommendation selectedStock={selectedStock} />
+            <Recommendation selectedStock={selectedStock} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <InvestorFeed selectedStock={selectedStock} />
-          <ChatPanel selectedStock={selectedStock} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <InvestorFeed selectedStock={selectedStock} />
+              <ChatPanel selectedStock={selectedStock} />
+            </div>
+
+            <NewsFeed selectedStock={selectedStock} />
+          </div>
+
+          <div className="space-y-8">
+            <Watchlist selectedStock={selectedStock} onStockSelect={setSelectedStock} />
+            <TrendingStocks onStockSelect={setSelectedStock} />
+          </div>
         </div>
       </main>
 
