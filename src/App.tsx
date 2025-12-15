@@ -6,6 +6,8 @@ import VideoSection from './components/VideoSection';
 import MarketChart from './components/MarketChart';
 import StockSelector from './components/StockSelector';
 import Recommendation from './components/Recommendation';
+import InvestorFeed from './components/InvestorFeed';
+import ChatPanel from './components/ChatPanel';
 
 function App() {
   const [selectedStock, setSelectedStock] = useState('AAPL');
@@ -34,6 +36,11 @@ function App() {
         />
 
         <Recommendation selectedStock={selectedStock} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <InvestorFeed selectedStock={selectedStock} />
+          <ChatPanel selectedStock={selectedStock} />
+        </div>
       </main>
 
       <footer className="border-t border-slate-700 mt-16 py-8">
